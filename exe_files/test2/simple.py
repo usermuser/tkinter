@@ -1,4 +1,5 @@
 from tkinter import *
+import time
 
 root=Tk()
 #root.attributes('-fullscreen')
@@ -64,5 +65,6 @@ button6.pack(pady=40,padx=60)
 button7.pack(pady=40,padx=60)
 button8.pack(pady=40,padx=60)
 #button9.pack(pady=10,padx=10)
-
+time.sleep(1)
 root.mainloop()
+time.sleep(1)
