@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+import sys
+sys.path.append("/usr/bin/python3")
+
 from tkinter import Tk, Canvas, Frame, BOTH, W, Button
 
 class Example(Frame):
@@ -17,7 +21,7 @@ class Example(Frame):
         canvas.create_text(20, 30, anchor=W, font="Purisa",
             text="Most relationships seem so transitory")
         canvas.create_line(300, 35, 300, 200, dash=(4, 2))
-        button1=Button(self,text=u'Первая кнопка',
+        button1=Button(self,text='Button1',
             font=20,height=3,width=20, command=self.client_exit)
 
         # button1.pack(fill=BOTH, expand=1)
@@ -35,7 +39,7 @@ def main():
     root.overrideredirect(False)
     root.attributes('-fullscreen',True)
     # root.state('zoomed')
-    root.title(u'Заголовок НАХ')
+    root.title('Zagolovok')
     root.mainloop()  
 
 

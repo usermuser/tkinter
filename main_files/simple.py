@@ -1,4 +1,5 @@
 from tkinter import *
+import sys
 
 root=Tk()
 #root.attributes('-fullscreen')
@@ -7,7 +8,7 @@ root=Tk()
 root.overrideredirect(True)
 root.overrideredirect(False)
 root.attributes('-fullscreen',True)
-root.state('zoomed')
+#root.state('zoomed') # this string must be commented in linux
 root.title(u'Заголовок НАХ')
 #root.resizable(True, False) #(horizontally, vertically)
 
@@ -29,7 +30,7 @@ text_frame3=Frame(root,
                   )
 
 def client_exit():
-            exit()
+            sys.exit()
 
 #Надписи на кнопках
 button1=Button(frame1,text=u'Первая кнопка',font=20,height=3,width=20,command=client_exit)
