@@ -87,12 +87,12 @@ while True:
             turtle.write('Загаданное число меньше')
 
     if number == x:
-        gotoxy(-150,100)
+        gotoxy(-150, 120)
         turtle.color('green')
         turtle.write('Ура', font = ('Arial', 26, 'normal'))
         break
     else:
-        gotoxy(-150, 80)
+        gotoxy(-150, 100)
         turtle.color('red')
         turtle.write('Неверно', font = ('Arial', 26, 'normal'))
 
@@ -100,7 +100,7 @@ while True:
         draw_gibbet(try_count)
 
         if try_count == 10:
-            gotoxy(-150, 60)
+            gotoxy(-150, -200)
             turtle.color('red')
             turtle.write('Вы проиграли!', font = ('Arial', 26, 'normal'))
             break
