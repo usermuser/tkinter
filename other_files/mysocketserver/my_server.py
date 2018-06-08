@@ -11,8 +11,8 @@ def do_some_stuffs_with_input(input_string):
     #return input_string[::-1]
     return input_string
 
-def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096, num=None):
-    my_counter = 0
+def client_thread(conn, ip, port, var1, MAX_BUFFER_SIZE = 4096):
+
     # the input is in bytes, so decode it
     input_from_client_bytes = conn.recv(MAX_BUFFER_SIZE)
 
@@ -20,13 +20,15 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096, num=None):
     # this is test if it's sufficiently big
     import sys
     siz = sys.getsizeof(input_from_client_bytes)
-    if  siz >= MAX_BUFFER_SIZE:
+    if siz >= MAX_BUFFER_SIZE:
         print("The length of input is probably too long: {}".format(siz))
 
     # decode input and strip the end of line
     input_from_client = input_from_client_bytes.decode("utf8").rstrip()
 
-    res = do_some_stuffs_with_input(input_from_client)
+    int_res = int(input_from_client) + int(var1)
+    res=str(int_res)
+    #res = do_some_stuffs_with_input(input_from_client)
 
     #print("Result of processing {} is: {}".format(input_from_client, res))
     print('We recieved {}, now total is: {}'.format(input_from_client, res))
@@ -38,13 +40,14 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096, num=None):
 
 def start_server():
 
-    num1 = 0
-
     import socket
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # this is for easy starting/killing the app
     soc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     print('Socket created')
+
+    var1 = 0
+    print('var1 is:', var1)
 
     try:
         soc.bind(("127.0.0.1", 12345))
@@ -68,7 +71,7 @@ def start_server():
         ip, port = str(addr[0]), str(addr[1])
         print('Accepting connection from ' + ip + ':' + port)
         try:
-            Thread(target=client_thread, args=(conn, ip, port)).start()
+            Thread(target=client_thread, args=(conn, ip, port, var1)).start()
         except:
             print("Terible error!")
             import traceback
