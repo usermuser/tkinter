@@ -11,8 +11,8 @@ def do_some_stuffs_with_input(input_string):
     #return input_string[::-1]
     return input_string
 
-def client_thread(conn, ip, port, var1, MAX_BUFFER_SIZE = 4096):
-
+def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
+    global var1
     # the input is in bytes, so decode it
     input_from_client_bytes = conn.recv(MAX_BUFFER_SIZE)
 
@@ -25,13 +25,12 @@ def client_thread(conn, ip, port, var1, MAX_BUFFER_SIZE = 4096):
 
     # decode input and strip the end of line
     input_from_client = input_from_client_bytes.decode("utf8").rstrip()
-
-    int_res = int(input_from_client) + int(var1)
-    res=str(int_res)
+    var1 = var1 + int(input_from_client)
     #res = do_some_stuffs_with_input(input_from_client)
-
+    res=str(var1)
     #print("Result of processing {} is: {}".format(input_from_client, res))
     print('We recieved {}, now total is: {}'.format(input_from_client, res))
+    print('var1 =',var1)
 
     vysl = res.encode("utf8")  # encode the result string
     conn.sendall(vysl)  # send it to client
@@ -41,12 +40,12 @@ def client_thread(conn, ip, port, var1, MAX_BUFFER_SIZE = 4096):
 def start_server():
 
     import socket
+    global var1
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # this is for easy starting/killing the app
     soc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     print('Socket created')
 
-    var1 = 0
     print('var1 is:', var1)
 
     try:
@@ -71,11 +70,11 @@ def start_server():
         ip, port = str(addr[0]), str(addr[1])
         print('Accepting connection from ' + ip + ':' + port)
         try:
-            Thread(target=client_thread, args=(conn, ip, port, var1)).start()
+            Thread(target=client_thread, args=(conn, ip, port)).start()
         except:
             print("Terible error!")
             import traceback
             traceback.print_exc()
     soc.close()
-
+var1 = 0
 start_server()
