@@ -25,7 +25,6 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
                 if resp[0] == 'NUM':
                     num = int(resp[1])
                     print(num)
-                    
         else:
             print('Неизвестный запрос от клиента')
 
@@ -50,7 +49,7 @@ class Example(Frame):
         quit_btn=Button(self,text='Quit',
             font=20,height=3,width=20, command=self.client_exit)
         button1=Button(self,text='button1',
-            font=20,height=3,width=20)
+            font=20,height=3,width=20, command=self.send_num)
 
         quit_btn.pack(pady=40,padx=60)
         #button1.pack(fill=BOTH, expand=1) # растянуть
@@ -59,6 +58,11 @@ class Example(Frame):
 
     def client_exit(self):
             exit()
+
+    def send_num(self, MyTCPHandler):
+        send = MyTCPHandler.request.sendall(bytes(100, 'utf-8'))
+        print(send)
+
 
 def main():
   
