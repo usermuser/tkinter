@@ -21,7 +21,8 @@ COUNTER_6 = 0
 msg_from_serv_bytes = soc.recv(4096) # получили 4096 байт от сервера
 msg_from_serv = msg_from_serv_bytes.decode("utf8") # декодировали полученные данные
 
-if msg_from_serv
+if msg_from_serv.data == 'give_counter_6':
+    print('msg_from_serv.data =', msg_from_serv)
 
 def callback(): # старая функция, пока оставлю
     print("click!")
