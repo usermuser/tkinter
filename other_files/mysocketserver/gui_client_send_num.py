@@ -19,6 +19,7 @@ def send_num():
 
     print("Result from server is {}".format(result_string))
 
+
 b = Button(root, text="OK", command=callback)
 b.pack()
 
