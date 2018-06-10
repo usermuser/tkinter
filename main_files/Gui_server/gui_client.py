@@ -1,7 +1,7 @@
+# from tkinter import *
+import socket
 
-from tkinter import *
-
-root = Tk()
+# root = Tk()
 
 # Пока у клиента не будет кнопок
 # клиент все время подключен к серверу и ждет от него сообщений,
@@ -11,21 +11,22 @@ root = Tk()
 # и мы запустить функцию "send_counter_6"
 # когда сервер пришлет нам число, мы его прибавим к COUNTER_6
 
-import socket
-
-soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-soc.connect(("localhost", 12345))
-
 COUNTER_6 = 0
 
-msg_from_serv_bytes = soc.recv(4096) # получили 4096 байт от сервера
-msg_from_serv = msg_from_serv_bytes.decode("utf8") # декодировали полученные данные
+# клиент в самом начала шлет серваку команду старт
+def send_start():
 
-if msg_from_serv.data == 'give_counter_6':
-    print('msg_from_serv.data =', msg_from_serv)
+    soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    soc.connect(("localhost", 12345))
+    soc.send(('start').encode('utf8'))
 
-def callback(): # старая функция, пока оставлю
-    print("click!")
+    msg_from_serv_bytes = soc.recv(4096) # получили 4096 байт от сервера
+    msg_from_serv = msg_from_serv_bytes.decode("utf8") # декодировали полученные данные
+
+    if msg_from_serv.data == 'give_counter_6':
+        print('msg_from_serv.data =', msg_from_serv)
+        soc.send((COUNTER_6).encode('utf8'))
+        print('COUNTER_6 sended')
 
 def send_num(): # старая функция, на ее основе сделаю новую
     import socket
@@ -41,6 +42,7 @@ def send_num(): # старая функция, на ее основе сдела
 
     print("Result from server is {}".format(result_string))
 
+send_start()
 
 # b = Button(root, text="OK", command=callback) # старая кнопка
 # b.pack()
@@ -48,4 +50,4 @@ def send_num(): # старая функция, на ее основе сдела
 # b2 = Button(root, text='send 100', command=send_num) # старая кнопка
 # b2.pack()
 
-mainloop()
+# mainloop()

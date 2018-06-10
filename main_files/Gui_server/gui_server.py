@@ -1,14 +1,14 @@
 # server.py
 
-def do_some_stuffs_with_input(input_string):
-    """
-    This is where all the processing happens.
-
-    Let's just read the string backwards
-    """
-
-    print("Processing that nasty input!")
-    return input_string[::-1]
+# def do_some_stuffs_with_input(input_string):
+#     """
+#     This is where all the processing happens.
+#
+#     Let's just read the string backwards
+#     """
+#
+#     print("Processing that nasty input!")
+#     return input_string[::-1]
 
 def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
 
@@ -24,12 +24,21 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
 
     # decode input and strip the end of line
     input_from_client = input_from_client_bytes.decode("utf8").rstrip()
+    splitted_input_from_client = input_from_client.split(';')
+
+    print('\n\n len(splitted_input_from_client) =', len(splitted_input_from_client))
+    print('\n\n splitted_input_from_client[0] =',splitted_input_from_client[0])
 
     # res = do_some_stuffs_with_input(input_from_client)
     # print("Result of processing {} is: {}".format(input_from_client, res))
-    res = input('сука пиши: give_counter_6')
-    vysl = res.encode("utf8")  # encode the result string
-    conn.sendall(vysl)  # send it to client
+    if splitted_input_from_client[0] == 'start':
+        res = 'give_counter_6'
+        vysl = res.encode("utf8")  # encode the result string
+        conn.sendall(vysl)  # send it to client
+
+    if splitted_input_from_client[0] == 'COUNTER_6':
+        print('\n\n recieved COUNTER_6 =', splitted_input_from_client[1])
+
     conn.close()  # close connection
     print('Connection ' + ip + ':' + port + " ended")
 
