@@ -41,8 +41,9 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
     #     conn.sendall(vysl)  # send it to client
     #     print('requesting COUNTER_6')
     #
-    # if splitted_input_from_client[0] == 'COUNTER_6':
-    #     print('\n recieved COUNTER_6 =', splitted_input_from_client[1])
+    if input_from_client[0] == 'GET_COUNTER_6':
+         print('input_from_client =', input_from_client)
+        # print('\n recieved COUNTER_6 =', splitted_input_from_client[1])
     conn.close()  # close connection
     print('Connection ' + ip + ':' + port + " ended")
 

@@ -10,7 +10,7 @@ HOST = 'localhost'
 PORT = 9999
 
 
-def get_counter_6():
+def get_counter(request):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((HOST, PORT))
@@ -19,8 +19,11 @@ def get_counter_6():
         sys.exit(13)
 
     try:
-        sock.sendall(bytes('START', 'utf-8'))
+        request = request
+        print('type(request) = ', type(request), '\nrequest =', request)
+        sock.send(bytes(request, 'utf-8'))
         recieved = sock.recv(1024).decode()
+        print(recieved)
     except:
         print('Ошибка отправки данных серверу!')
         sock.close()
@@ -43,8 +46,7 @@ def draw_window():
     button3 = Button(frame1, text=u'Третья кнопка', font=20, height=3, width=20)
     button4 = Button(frame1, text=u'Четвертая кнопка', font=20, height=3, width=20)
     button5 = Button(frame2, text=u'Пятая кнопка', font=20, height=3, width=20)
-    button6 = Button(frame2, text=u'Шестая кнопка', font=20, height=3, width=20,
-                     command=get_counter_6)
+    button6 = Button(frame2, text=u'Шестая кнопка', font=20, height=3, width=20, command=get_counter('GET_COUNTER_6'))
     button7 = Button(frame2, text=u'Седьмая кнопка', font=20, height=3, width=20)
     button8 = Button(frame2, text=u'Восьмая кнопка', font=20, height=3, width=20)
 
@@ -62,6 +64,11 @@ def draw_window():
     button7.pack(pady=40, padx=60)
     button8.pack(pady=40, padx=60)
 
+    # Пишем текст
+    text1 = Canvas(frame2)
+    text1.create_text(20, 130, anchor=W, font="Purisa",
+            text="Who doesn't long for someone to hold")
+    text1.pack()
 
     root.mainloop()
 
