@@ -18,15 +18,16 @@ def send_start():
 
     soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     soc.connect(("localhost", 12345))
-    soc.send(('start').encode('utf8'))
+    # soc.send(('start').encode('utf8'))
 
     msg_from_serv_bytes = soc.recv(4096) # получили 4096 байт от сервера
     msg_from_serv = msg_from_serv_bytes.decode("utf8") # декодировали полученные данные
     print('recieved msg_from_serv. msg_from_serv =', msg_from_serv)
 
     if msg_from_serv == 'give_counter_6':
-        soc.close()
-        send_counter_6() # Функция отправки COUNTER_6
+        send_counter_6()  # Функция отправки COUNTER_6
+        # soc.close()
+
 
 
 def send_counter_6():
