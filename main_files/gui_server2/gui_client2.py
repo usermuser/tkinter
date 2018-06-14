@@ -8,7 +8,10 @@
 import socket, sys, time
 from tkinter import *
 
-HOST = 'localhost'
+# HOST = 'localhost'
+# HOST = '192.168.0.102'
+HOST = '88.206.39.186'
+
 PORT = 9999
 
 #
