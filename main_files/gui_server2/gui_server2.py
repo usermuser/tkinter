@@ -26,7 +26,8 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
 
     # decode input and strip the end of line
     input_from_client = input_from_client_bytes.decode("utf8").rstrip()
-    splitted_input_from_client = input_from_client.split(';')
+    print('[*] Recieved from client =', input_from_client)
+    # splitted_input_from_client = input_from_client.split(';')
 
     # print('\n len(splitted_input_from_client) =', len(splitted_input_from_client))
     # print('splitted_input_from_client[0] =',splitted_input_from_client[0])
@@ -41,10 +42,17 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
     #     conn.sendall(vysl)  # send it to client
     #     print('requesting COUNTER_6')
     #
-    if input_from_client[0] == 'GET_COUNTER_6':
-         print('input_from_client =', input_from_client)
-        # print('\n recieved COUNTER_6 =', splitted_input_from_client[1])
-    conn.close()  # close connection
+    # if input_from_client[0] == 'GET_COUNTER_6':
+    #      print('input_from_client =', input_from_client)
+    #     # print('\n recieved COUNTER_6 =', splitted_input_from_client[1])
+    # conn.close()  # close connection
+
+    if input_from_client == 'GET_COUNTER_6':
+        print('[*] Recieved GET_COUNTER_6 request')
+        response = '100'.encode('utf8')
+        conn.send(response)
+        print('[*] Sended response =', response)
+        conn.close()
     print('Connection ' + ip + ':' + port + " ended")
 
 

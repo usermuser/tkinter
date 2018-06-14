@@ -10,7 +10,7 @@ HOST = 'localhost'
 PORT = 9999
 
 
-def get_counter(request):
+def get_counter_1():
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect((HOST, PORT))
@@ -19,7 +19,142 @@ def get_counter(request):
         sys.exit(13)
 
     try:
-        request = request
+        request = 'GET_COUNTER_5'
+        print('type(request) = ', type(request), '\nrequest =', request)
+        sock.send(bytes(request, 'utf-8'))
+        recieved = sock.recv(1024).decode()
+        print(recieved)
+    except:
+        print('Ошибка отправки данных серверу!')
+        sock.close()
+        sys.exit(14)
+
+    sock.close()
+
+
+def get_counter_2():
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((HOST, PORT))
+    except:
+        print('Ошибка подключения к серверу')
+        sys.exit(13)
+
+    try:
+        request = 'GET_COUNTER_2'
+        print('type(request) = ', type(request), '\nrequest =', request)
+        sock.send(bytes(request, 'utf-8'))
+        recieved = sock.recv(1024).decode()
+        print(recieved)
+    except:
+        print('Ошибка отправки данных серверу!')
+        sock.close()
+        sys.exit(14)
+
+    sock.close()
+
+
+def get_counter_3():
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((HOST, PORT))
+    except:
+        print('Ошибка подключения к серверу')
+        sys.exit(13)
+
+    try:
+        request = 'GET_COUNTER_3'
+        print('type(request) = ', type(request), '\nrequest =', request)
+        sock.send(bytes(request, 'utf-8'))
+        recieved = sock.recv(1024).decode()
+        print(recieved)
+    except:
+        print('Ошибка отправки данных серверу!')
+        sock.close()
+        sys.exit(14)
+
+    sock.close()
+
+
+def get_counter_4():
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((HOST, PORT))
+    except:
+        print('Ошибка подключения к серверу')
+        sys.exit(13)
+
+    try:
+        request = 'GET_COUNTER_4'
+        print('type(request) = ', type(request), '\nrequest =', request)
+        sock.send(bytes(request, 'utf-8'))
+        recieved = sock.recv(1024).decode()
+        print(recieved)
+    except:
+        print('Ошибка отправки данных серверу!')
+        sock.close()
+        sys.exit(14)
+
+    sock.close()
+
+
+def get_counter_5():
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((HOST, PORT))
+        except:
+            print('Ошибка подключения к серверу')
+            sys.exit(13)
+
+        try:
+            request = 'GET_COUNTER_5'
+            print('type(request) = ', type(request), '\nrequest =', request)
+            sock.send(bytes(request, 'utf-8'))
+            recieved = sock.recv(1024).decode()
+            print(recieved)
+        except:
+            print('Ошибка отправки данных серверу!')
+            sock.close()
+            sys.exit(14)
+
+        sock.close()
+
+
+
+
+
+def get_counter_7():
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((HOST, PORT))
+    except:
+        print('Ошибка подключения к серверу')
+        sys.exit(13)
+
+    try:
+        request = 'GET_COUNTER_7'
+        print('type(request) = ', type(request), '\nrequest =', request)
+        sock.send(bytes(request, 'utf-8'))
+        recieved = sock.recv(1024).decode()
+        print(recieved)
+    except:
+        print('Ошибка отправки данных серверу!')
+        sock.close()
+        sys.exit(14)
+
+    sock.close()
+
+
+def get_counter_8():
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((HOST, PORT))
+    except:
+        print('Ошибка подключения к серверу')
+        sys.exit(13)
+
+    try:
+        request = 'GET_COUNTER_8'
         print('type(request) = ', type(request), '\nrequest =', request)
         sock.send(bytes(request, 'utf-8'))
         recieved = sock.recv(1024).decode()
@@ -33,6 +168,28 @@ def get_counter(request):
 
 
 def draw_window():
+    def get_counter_6():
+
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((HOST, PORT))
+        except:
+            print('Ошибка подключения к серверу')
+            sys.exit(13)
+
+        try:
+            request = 'GET_COUNTER_6'
+            print('type(request) = ', type(request), '\nrequest =', request)
+            sock.send(bytes(request, 'utf-8'))
+            recieved = sock.recv(4096).decode()
+            print('recieved =', recieved)
+        except:
+            print('Ошибка отправки данных серверу!')
+            sock.close()
+            sys.exit(14)
+
+        sock.close()
+
     root = Tk()
     root.title('GUI SERVER')
 
@@ -46,7 +203,8 @@ def draw_window():
     button3 = Button(frame1, text=u'Третья кнопка', font=20, height=3, width=20)
     button4 = Button(frame1, text=u'Четвертая кнопка', font=20, height=3, width=20)
     button5 = Button(frame2, text=u'Пятая кнопка', font=20, height=3, width=20)
-    button6 = Button(frame2, text=u'Шестая кнопка', font=20, height=3, width=20, command=get_counter('GET_COUNTER_6'))
+    button6 = Button(frame2, text=u'Шестая кнопка', font=20, height=3, width=20)
+    # button6.bind('<Button-1>', get_counter(request='GET_COUNTER_6'))
     button7 = Button(frame2, text=u'Седьмая кнопка', font=20, height=3, width=20)
     button8 = Button(frame2, text=u'Восьмая кнопка', font=20, height=3, width=20)
 
@@ -70,10 +228,13 @@ def draw_window():
             text="Who doesn't long for someone to hold")
     text1.pack()
 
+    root.after(500,get_counter_6())  #(time_delay, method_to_execute)
+
     root.mainloop()
 
 
 draw_window()
+
 
 # c = 0
 # while True:
