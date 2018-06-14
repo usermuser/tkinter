@@ -13,6 +13,7 @@
 import socket, sys, time
 from tkinter import *
 
+c3=0
 
 def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
 
@@ -48,6 +49,17 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
     #     # print('\n recieved COUNTER_6 =', splitted_input_from_client[1])
     # conn.close()  # close connection
 
+    if input_from_client == 'GET_COUNTER_3':
+        global c3
+        c3 += 1
+        print('[*] Recieved GET_COUNTER_6 request')
+        cur_time = time.strftime(str(c3))
+        response = cur_time.encode('utf8')
+        conn.send(response)
+        print('[*] Sended response =', response)
+        conn.close()
+
+
     if input_from_client == 'GET_COUNTER_6':
         print('[*] Recieved GET_COUNTER_6 request')
         cur_time = time.strftime('%H:%M:%S')
@@ -55,7 +67,7 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
         conn.send(response)
         print('[*] Sended response =', response)
         conn.close()
-    print('Connection ' + ip + ':' + port + " ended")
+    print('[*] Connection ' + ip + ':' + port + " ended")
 
 
 def start_server():
@@ -89,7 +101,7 @@ def start_server():
 
         try:
             Thread(target=client_thread, args=(conn, ip, port)).start()
-            print('[*] Started client_thread')
+            print('\n[*] Started client_thread')
         except:
             print("Terible error!")
             import traceback

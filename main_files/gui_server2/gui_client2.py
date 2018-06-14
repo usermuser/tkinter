@@ -175,6 +175,29 @@ def draw_window():
     def callback():
         print('click!')
 
+    def get_counter_3():
+
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((HOST, PORT))
+        except:
+            print('Ошибка подключения к серверу')
+            sys.exit(13)
+
+        try:
+            request = 'GET_COUNTER_3'
+            # print('type(request) = ', type(request), '\nrequest =', request)
+            sock.send(bytes(request, 'utf-8'))
+            recieved = sock.recv(4096).decode()
+            return recieved
+            # print('recieved =', recieved)
+        except:
+            print('Ошибка отправки данных серверу!')
+            sock.close()
+            sys.exit(14)
+
+        sock.close()
+
     def get_counter_6():
 
         try:
@@ -209,7 +232,7 @@ def draw_window():
     # Готовим кнопки
     # button1 = Button(frame1, text=u'Первая кнопка', font=20, height=3, width=20)
     # button2 = Button(frame1, text=u'Вторая кнопка', font=20, height=3, width=20)
-    button3 = Button(frame1, text=u'Третья кнопка', font=20, height=3, width=20)
+    button3 = Button(frame1, text=u'Третья кнопка', font=20, height=3, width=20, command=get_counter_3)
     button4 = Button(frame1, text=u'Четвертая кнопка', font=20, height=3, width=20)
     button5 = Button(frame2, text=u'Пятая кнопка', font=20, height=3, width=20, command=callback)
     button6 = Button(frame2, text=u'Шестая кнопка', font=20, height=3, width=20, command=get_counter_6)
@@ -232,6 +255,9 @@ def draw_window():
 
     clock = Label(frame2, font=('times', 20, 'bold'), bg='green')
     clock.pack(pady=5, padx=5)
+
+    label_3=Label(frame1, font=('times', 20, 'bold'), bg='green')
+    label_3.pack(pady=5, padx=5)
 
     label_6=Label(frame2, font=('times', 20, 'bold'), bg='red')
     label_6.pack(pady=5, padx=5)
@@ -258,7 +284,8 @@ def draw_window():
         # calls itself every 200 milliseconds
         # to update the time display as needed
         # could use >200 ms, but display gets jerky
-        clock.after(200, tick)
+        clock.after(2000, tick)
+        label_3.config(text=get_counter_3())
         label_6.config(text=get_counter_6())
 
     tick()
