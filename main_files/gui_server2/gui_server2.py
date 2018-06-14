@@ -10,8 +10,9 @@
 # постом, он тем самым отправит деньги.
 # Для надежности можно сделать что бы чел зажал кнопку, или нажал два раза.
 
-import socket, sys
+import socket, sys, time
 from tkinter import *
+
 
 def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
 
@@ -49,7 +50,8 @@ def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
 
     if input_from_client == 'GET_COUNTER_6':
         print('[*] Recieved GET_COUNTER_6 request')
-        response = '100'.encode('utf8')
+        cur_time = time.strftime('%H:%M:%S')
+        response = cur_time.encode('utf8')
         conn.send(response)
         print('[*] Sended response =', response)
         conn.close()
