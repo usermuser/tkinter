@@ -13,7 +13,34 @@
 import socket, sys, time
 from tkinter import *
 
+def draw_server_window():
+    root = Tk()
+    root.title('Gui client2')
+    frame1 = Frame(root, bd=5, bg='green', relief=RAISED, )
+    button1 = Button(frame1, text=u'Первая кнопка', font=20, height=3, width=20)
+    frame1.pack(side=LEFT)
+    button1.pack(pady=40, padx=60)
+    root.mainloop()
+
 c3=0
+
+# time1 = ''
+#     def tick():
+#         global time1
+#         # get the current local time from the PC
+#         time2 = time.strftime('%H:%M:%S')
+#         # if time string has changed, update it
+#         if time2 != time1:
+#             time1 = time2
+#             clock.config(text=time2)
+#         # calls itself every 200 milliseconds
+#         # to update the time display as needed
+#         # could use >200 ms, but display gets jerky
+#         clock.after(2000, tick)
+#         label_3.config(text=get_counter_3())
+#         label_6.config(text=get_counter_6())
+#
+#     tick()
 
 def client_thread(conn, ip, port, MAX_BUFFER_SIZE = 4096):
 

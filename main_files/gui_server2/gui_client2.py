@@ -226,7 +226,7 @@ def draw_window():
 
 
     root = Tk()
-    root.title('GUI SERVER')
+    root.title('Gui client2')
 
     # Готовим два фрейма для кнопок
     frame1 = Frame(root, bd=5, bg='green', relief=RAISED, )
